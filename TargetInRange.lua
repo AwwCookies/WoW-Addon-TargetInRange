@@ -4,7 +4,8 @@ local TIRString = TargetInRangeFrame:CreateFontString(nil, "OVERLAY", "GameFontN
 TargetInRangeFrame:SetScript("OnUpdate", function()
     if (UnitExists("target")) then
         local nameplate = C_NamePlate.GetNamePlateForUnit("target")
-        if (nameplate == nil) then
+        -- if no nameplate or if nameplay is player nameplate
+        if (nameplate == nil or GetUnitName("player") == GetUnitName("target")) then
             TIRString:Hide()
             return
         end
