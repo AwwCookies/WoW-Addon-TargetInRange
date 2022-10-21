@@ -3,12 +3,6 @@ local TIRString = TargetInRangeFrame:CreateFontString(nil, "OVERLAY", "GameFontN
 
 TargetInRangeFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
 
-TargetInRangeFrame:SetScript("OnEvent", function(self, event, ...)
-      if(event == "PLAYER_TARGET_CHANGED") then
-         TIRString:SetText(tostring(IsActionInRange(1)))
-      end
-end)
-
 TargetInRangeFrame:SetScript("OnUpdate", function()
     if (UnitExists("target")) then
         local nameplate = C_NamePlate.GetNamePlateForUnit("target")
