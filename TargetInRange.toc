@@ -3,5 +3,6 @@
 ## Title: Target In Range
 ## Notes: Tells you if target is in range
 ## Author: Aww
+## SavedVariables: TargetInRangeSettings
 
 TargetInRange.lua
