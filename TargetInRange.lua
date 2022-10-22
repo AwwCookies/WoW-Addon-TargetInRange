@@ -9,16 +9,17 @@ local defaultSettings = {
     inRangeRed = 0,
     inRangeGreen = 255,
     inRangeBlue = 0,
-    inRangeAlpha = 1,
+    inRangeAlpha = 100,
     OutOfRangeEnabled = true,
     OutOfRangeRed = 255,
     OutOfRangeGreen = 0,
     OutOfRangeBlue = 0,
-    OutOfRangeAlpha = 1
+    OutOfRangeAlpha = 100
 }
 
 TargetInRangeSettings = TargetInRangeSettings or defaultSettings
 
+-- actual addon code
 f:SetScript("OnUpdate", function()
     -- unit targeted
     if (UnitExists("target") and TargetInRangeSettings.enabled) then
@@ -37,7 +38,7 @@ f:SetScript("OnUpdate", function()
                 TargetInRangeSettings.inRangeRed,
                 TargetInRangeSettings.inRangeGreen,
                 TargetInRangeSettings.inRangeBlue,
-                TargetInRangeSettings.inRangeAlpha
+                TargetInRangeSettings.inRangeAlpha/100
             )
             TIRString:SetText("In Range")
             if (not TargetInRangeSettings.inRangeEnabled) then
@@ -48,7 +49,7 @@ f:SetScript("OnUpdate", function()
                 TargetInRangeSettings.OutOfRangeRed,
                 TargetInRangeSettings.OutOfRangeGreen,
                 TargetInRangeSettings.OutOfRangeBlue,
-                TargetInRangeSettings.OutOfRangeAlpha
+                TargetInRangeSettings.OutOfRangeAlpha/100
             )
             TIRString:SetText("Out of Range")
             if (not TargetInRangeSettings.OutOfRangeEnabled) then
@@ -127,7 +128,7 @@ local function createAddOnSettings()
         local setting = Settings.RegisterProxySetting(
             subcategoryInRange, variable, TargetInRangeSettings, type(defaultValue), name, defaultValue
         )
-        local options = Settings.CreateSliderOptions(0, 1, 0.1)
+        local options = Settings.CreateSliderOptions(0, 100, 1)
         options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right);
         Settings.CreateSlider(subcategoryInRange, setting, options, tooltip)
     end
@@ -183,7 +184,7 @@ local function createAddOnSettings()
         local setting = Settings.RegisterProxySetting(
             subcategoryOutOfRange, variable, TargetInRangeSettings, type(defaultValue), name, defaultValue
         )
-        local options = Settings.CreateSliderOptions(0, 1, 0.1)
+        local options = Settings.CreateSliderOptions(0, 100, 1)
         options:SetLabelFormatter(MinimalSliderWithSteppersMixin.Label.Right);
         Settings.CreateSlider(subcategoryOutOfRange, setting, options, tooltip)
     end
